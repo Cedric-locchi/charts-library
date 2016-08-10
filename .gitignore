@@ -1,0 +1,5 @@
+#config jetbrain
+.idea
+
+# dependances
+node_modules
