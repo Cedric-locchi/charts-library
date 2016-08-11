@@ -1,3 +1,3 @@
-librairie Javascript de creation de graphique.
+chart library
 
-Elle a pour but d'experimenter la POO avec javascript.
+libraire de dessin de graphique pour expérimentation de la POO javascript et de l'utilisation des canvas.

@@ -1,11 +1,10 @@
-var baseChart = require('./BaseChart.js');
-
 var LineChart = function() {
     this._init();
 
     this._drawChart = function(canvas) {
 
         if (canvas.getContext) {
+
             var ctx = canvas.getContext('2d');
 
             var chartPadding = 20;
@@ -17,10 +16,9 @@ var LineChart = function() {
                 height: canvas.clientHeight - chartPadding * 2
             };
 
-            var max = this.series[0].data.reduce( (prevMax, d) => {
+            var max = this.series[0].data.reduce( function (prevMax, d) {
                 return d.value > prevMax ? d.value : prevMax;
             }, 0);
-
 
             var pointSpacing = drawArea.width / (this.series[0].data.length - 1) ;
 
@@ -32,17 +30,17 @@ var LineChart = function() {
             ctx.fillStyle = this.series[0].color;
             ctx.beginPath();
             ctx.moveTo(0,  this.series[0].data[0].value * drawArea.height / max);
-            // lines
-            for (let i = 1; i < this.series[0].data.length; i++) {
+
+            for (var i = 1; i < this.series[0].data.length; i++) {
                 ctx.lineTo(i * pointSpacing, this.series[0].data[i].value * drawArea.height / max);
             }
-            ctx.stroke();
-            // dots
-            for (let i = 1; i < this.series[0].data.length; i++) {
-                ctx.beginPath();
-                ctx.arc(i * pointSpacing, this.series[0].data[i].value * drawArea.height / max, pointRadius, 0, 2*Math.PI);
-                ctx.fill();
 
+            ctx.stroke();
+
+            for (var j = 1; j < this.series[0].data.length; j++) {
+                ctx.beginPath();
+                ctx.arc(i * pointSpacing, this.series[0].data[j].value * drawArea.height / max, pointRadius, 0, 2*Math.PI);
+                ctx.fill();
             }
 
 
@@ -51,6 +49,4 @@ var LineChart = function() {
     };
 };
 
-LineChart.prototype = baseChart;
-
-module.exports = LineChart;
+LineChart.prototype =  new BaseChart();

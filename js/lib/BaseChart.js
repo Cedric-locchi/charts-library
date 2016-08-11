@@ -1,5 +1,3 @@
-var UUID = require('uuid');
-
 var BaseChart = function() {
 
     this._init = function() {
@@ -8,19 +6,19 @@ var BaseChart = function() {
     };
 
     this.renderTo = function(o) {
+
         var container;
-        if(typeof o === 'string') { // assume CSS selector here
+
+        if(typeof o === 'string') {
             container = document.querySelector(o);
         }
 
         var canvas;
         if (canvas === undefined) {
             canvas = document.createElement('canvas');
-            canvas.id     = this.conf.name || 'chart-' + UUID.v4();
-            canvas.width  = container.clientWidth; // https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
+            canvas.id     = this.conf.name || 'chart-' + Math.floor(Math.random());
+            canvas.width  = container.clientWidth;
             canvas.height = container.clientHeight;
-            //canvas.style.zIndex   = 8;
-            //canvas.style.position = "absolute";
             canvas.style.border   = '1px solid #999';
 
             container.appendChild(canvas);
@@ -34,7 +32,3 @@ var BaseChart = function() {
         throw new Error('Don\'t render the BaseChart, use a specialized type (PieChart, HistogramChart,...)' );
     };
 };
-
-var chartsBasePrototype = new BaseChart();
-
-module.exports = chartsBasePrototype;
